@@ -1,49 +1,27 @@
 import argparse
-import os
-
-FILE_NAME = "tasks.txt"
-def load_tasks():
-    if not os.path.exists(FILE_NAME):
-        return []
-    with open(FILE_NAME, "r") as file:
-        return [task.strip() for task in file.readlines()]
-def save_tasks(tasks):
-    with open(FILE_NAME, "w") as file:
-        for task in tasks:
-            file.write(task + "\n")
-
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    "action",
-    choices=["add", "view", "delete"]
-)
-parser.add_argument(
-    "task",
-    nargs="?"
-)
+parser.add_argument("action")
+parser.add_argument("task", nargs="?")
 args = parser.parse_args()
-tasks = load_tasks()
 if args.action == "add":
-    tasks.append(args.task)
-    save_tasks(tasks)
-    print("Task added")
+   file = open("tasks1.txt", "a")
+   file.write(args.task + "\n")
+   file.close()
+   print("Task added")
 
 elif args.action == "view":
-    if (len(tasks) == 0):
-        print("No tasks found")
-    else:
-        print("To-Do List:")
-
-        for i, task in enumerate(tasks, 1):
-            print(i,".",task)
+    file = open("tasks1.txt", "r")
+    print(file.read())
+    file.close()
 
 elif args.action == "delete":
-    num = int(args.task) - 1
-    if 0 <= num < len(tasks):
-        removed = tasks.pop(num)
-        save_tasks(tasks)
-        print("Deleted:", removed)
-    else:
-        print("Invalid task number")
+    file = open("tasks1.txt", "r")
+    tasks = file.readlines()
+    file.close()
+    tasks.pop(int(args.task) - 1)
+    file = open("tasks1.txt", "w")
+    file.writelines(tasks)
+    file.close()
+    print("Task deleted")
     
 
