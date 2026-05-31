@@ -273,12 +273,5 @@ else:
     print("Invalid action")
 
 
-# file=open("tasks.txt","w") deletes old content writes new content
-# tasks=file.readlines() it reads the file and convert its content from file to list, each task to list
-# undo=open("undo.txt","w") undo.writelines(tasks)
-# undo.txt works well as it stores the changes, but queue=[] changes after the program ends
 
-# file.write(task.name+"\n")-> practice dsa,.. no priority, or completed info stored,
-# store it like practice|high|true
-# .gitinore hides data which should not be accessed
 
